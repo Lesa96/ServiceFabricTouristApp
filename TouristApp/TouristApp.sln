@@ -7,6 +7,8 @@ Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "TouristApp", "TouristApp\To
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecommendationService", "RecommendationService\RecommendationService.csproj", "{34DE9C9A-83F8-4ADE-A9C1-F19EB5D27696}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{B584BB62-A963-4700-96F5-CA5E06E29FA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,14 @@ Global
 		{34DE9C9A-83F8-4ADE-A9C1-F19EB5D27696}.Release|Any CPU.Build.0 = Release|Any CPU
 		{34DE9C9A-83F8-4ADE-A9C1-F19EB5D27696}.Release|x64.ActiveCfg = Release|Any CPU
 		{34DE9C9A-83F8-4ADE-A9C1-F19EB5D27696}.Release|x64.Build.0 = Release|Any CPU
+		{B584BB62-A963-4700-96F5-CA5E06E29FA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B584BB62-A963-4700-96F5-CA5E06E29FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B584BB62-A963-4700-96F5-CA5E06E29FA0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B584BB62-A963-4700-96F5-CA5E06E29FA0}.Debug|x64.Build.0 = Debug|Any CPU
+		{B584BB62-A963-4700-96F5-CA5E06E29FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B584BB62-A963-4700-96F5-CA5E06E29FA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B584BB62-A963-4700-96F5-CA5E06E29FA0}.Release|x64.ActiveCfg = Release|Any CPU
+		{B584BB62-A963-4700-96F5-CA5E06E29FA0}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
