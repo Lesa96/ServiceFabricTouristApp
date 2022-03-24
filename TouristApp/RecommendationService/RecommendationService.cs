@@ -8,6 +8,9 @@ using Common;
 using Common.Model;
 using Microsoft.ServiceFabric.Data.Collections;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
+using Microsoft.ServiceFabric.Services.Remoting.Runtime;
+//using Microsoft.ServiceFabric.Services.Communication.Wcf;
+//using Microsoft.ServiceFabric.Services.Communication.Wcf.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
 
 namespace RecommendationService
@@ -21,14 +24,53 @@ namespace RecommendationService
             : base(context)
         { }
 
-        public Task AddRecomendation(Recommendation recommendation)
+        public async Task AddRecomendation(Recommendation recommendation)
         {
-            throw new NotImplementedException();
+            var stateManager = this.StateManager;
+            var recommendations = await stateManager.GetOrAddAsync<IReliableDictionary<int, Recommendation>>("recommendations");
+
+            try
+            {
+                using (var tx = stateManager.CreateTransaction())
+                {
+                    await recommendations.AddOrUpdateAsync(tx, recommendation.ID, recommendation, (key, value) => value);
+
+                    await tx.CommitAsync();
+                }
+            }
+            catch ( Exception e)
+            {
+
+                ServiceEventSource.Current.ServiceMessage(this.Context,"Exception in RecommendationService - AddRecomendation():" + e.Message);
+            }
         }
 
-        public Task<List<Recommendation>> GetRecommendations()
+        public async Task<List<Recommendation>> GetRecommendations()
         {
-            throw new NotImplementedException();
+            var stateManager = this.StateManager;
+            var recommendations = await stateManager.GetOrAddAsync<IReliableDictionary<int, Recommendation>>("recommendations");
+            List<Recommendation> recommendationList = new List<Recommendation>();
+
+            try
+            {
+                using (var tx = stateManager.CreateTransaction())
+                {
+                    var enumerableData = await recommendations.CreateEnumerableAsync(tx);
+                    var enumerator = enumerableData.GetAsyncEnumerator();
+                    while (await enumerator.MoveNextAsync(new CancellationToken()))
+                    {
+                        recommendationList.Add(enumerator.Current.Value);
+                    }
+                    await tx.CommitAsync();
+                }
+            }
+            catch (Exception e)
+            {
+
+                ServiceEventSource.Current.ServiceMessage(this.Context, "Exception in RecommendationService - GetRecommendations():" + e.Message);
+            }
+
+            return recommendationList;
         }
 
         /// <summary>
@@ -40,7 +82,8 @@ namespace RecommendationService
         /// <returns>A collection of listeners.</returns>
         protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
         {
-            return new ServiceReplicaListener[0];
+            return this.CreateServiceRemotingReplicaListeners();
+            
         }
 
         /// <summary>

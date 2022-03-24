@@ -3,7 +3,7 @@
   <Parameters>
     <Parameter Name="Client_InstanceCount" DefaultValue="-1" />
     <Parameter Name="RecommendationService_MinReplicaSetSize" DefaultValue="3" />
-    <Parameter Name="RecommendationService_PartitionCount" DefaultValue="1" />
+    <Parameter Name="RecommendationService_PartitionCount" DefaultValue="3" />
     <Parameter Name="RecommendationService_TargetReplicaSetSize" DefaultValue="3" />
   </Parameters>
   <Services>

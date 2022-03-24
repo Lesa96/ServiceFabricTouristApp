@@ -1,19 +1,20 @@
 ﻿using Common.Model;
+using Microsoft.ServiceFabric.Services.Remoting;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Common
 {
-    [ServiceContract]
-    public interface IRecommendationService
+    //[ServiceContract]
+    public interface IRecommendationService : IService
     {
-        [OperationContract]
+        //[OperationContract]
         Task<List<Recommendation>> GetRecommendations();
-
-        [OperationContract]
+        //[OperationContract]
         Task AddRecomendation(Recommendation recommendation);
     }
 }
