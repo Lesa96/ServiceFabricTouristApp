@@ -36,6 +36,9 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Client\Client.csproj">
+      <ServiceLaunchUrl>http://localhost:{ServicePort}/</ServiceLaunchUrl>
+    </ProjectReference>
     <ProjectReference Include="..\RecommendationService\RecommendationService.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
